@@ -14,8 +14,13 @@
 	-webkit-box-direction: normal;
 	border-radius: 10px;
 	min-height: 400px;
-	padding: 20px;
+	padding: 20px 30px;
 	box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.17);
+}
+
+.login-header {
+	font-family: "Laila", sans-serif;
+	font-size: 36px;
 }
 
 .login-form {
@@ -36,9 +41,13 @@
 	outline: none;
 	border-radius: 3px;
 	display: flex;
+	background-color: black;
 	flex-direction: column;
+	color: white;
 	align-items: center;
 	min-height: 36px;
+	font-family: "Poppins", sans-serif;
+	margin-top: 40px;
 	padding: 10px 10px;
 	cursor: pointer;
 }
@@ -61,6 +70,21 @@
 	flex: 0.3;
 	display: flex;
 	width: 100%;
-	justify-content: space-evenly;
+	justify-content: flex-end;
 	align-items: center;
+}
+
+.sign-up-new > span {
+	padding: 0 10px;
+	font-size: 24px;
+	font-weight: 500;
+	font-family: "Bona Nova";
+}
+
+.signup-link {
+	font-size: 20px;
+	text-decoration: none;
+	font-weight: 500;
+	color: black;
+	font-family: "Poppins";
 }

@@ -40,7 +40,7 @@ export default function Login() {
 			<div className='login-right'>
 				<div className='login-wrapper'>
 					<div className='login-form'>
-						<h1 className='login-header'>LogIn</h1>
+						<h1 className='login-header'>LOG IN</h1>
 						<form onSubmit={onSubmit}>
 							<input
 								type='text'
@@ -59,7 +59,7 @@ export default function Login() {
 								onChange={onChange}
 							/>
 							<button type='submit' className='login-button'>
-								{loading ? "Logging In" : "logIn"}
+								{loading ? "Logging In" : "LOG IN"}
 							</button>
 						</form>
 						{Object.keys(errors).length > 0 && (

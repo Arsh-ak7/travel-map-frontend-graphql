@@ -9,7 +9,9 @@ export default function Navbar() {
 	const { user, logout } = useContext(AuthContext);
 	return (
 		<div className='navbar'>
-			<div className='logo'>TRAVEL MAP</div>
+			<Link to='/' className='home-link'>
+				<div className='logo'>TRAVEL MAP</div>
+			</Link>
 			<div className='button-container'>
 				{user ? (
 					<>
