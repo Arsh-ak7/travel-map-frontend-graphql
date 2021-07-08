@@ -4,6 +4,8 @@ import { AuthProvider } from "./Context/auth";
 import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import AuthRoute from "./Utils/authRoute";
+import Map from "./Components/Map";
+import Login from "./Pages/Login";
 
 function App() {
 	return (
@@ -11,6 +13,8 @@ function App() {
 			<AuthProvider>
 				<Router>
 					<Navbar />
+					<Route exact path='/' component={Map} />
+					<AuthRoute exact path='/login' component={Login} />
 				</Router>
 			</AuthProvider>
 		</div>
