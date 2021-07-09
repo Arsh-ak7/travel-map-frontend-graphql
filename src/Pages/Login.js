@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { AuthContext } from "../Context/auth";
 import { useForm } from "../Utils/hooks";
+import TravelLogin from "../images/travel-register.png";
 import "../CSS/login.css";
 
 export default function Login() {
@@ -20,7 +21,7 @@ export default function Login() {
 	const [loginUser, { loading }] = useMutation(LOGIN_USER, {
 		update(_, { data: { login: userData } }) {
 			context.login(userData);
-			history.push("/home");
+			history.push("/");
 		},
 		onError(err) {
 			setErrors(err.graphQLErrors[0].extensions.exception.errors);
@@ -35,7 +36,9 @@ export default function Login() {
 	return (
 		<div className='login-container'>
 			<div className='login-left'>
-				<div className='image-box'>Image Here</div>
+				<div className='image-box'>
+					<img className='login-image' src={TravelLogin} alt='travel' />
+				</div>
 			</div>
 			<div className='login-right'>
 				<div className='login-wrapper'>

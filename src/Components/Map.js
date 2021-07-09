@@ -15,7 +15,7 @@ export default function Map() {
 				{...viewport}
 				width='100vw'
 				height='100vh'
-				transitionDuration='300'
+				transitionDuration='35'
 				mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
 				onViewportChange={(viewport) => setViewport(viewport)}
 				mapStyle='mapbox://styles/arsh-ak7/ckqi1dldb05q217rr6vfq76j3'></ReactMapGL>

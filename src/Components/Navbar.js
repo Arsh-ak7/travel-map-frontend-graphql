@@ -25,11 +25,18 @@ export default function Navbar() {
 						</div>
 					</>
 				) : (
-					<div className='btn'>
-						<Link to='/login'>
-							<button className='login-btn'>Log In</button>
-						</Link>
-					</div>
+					<>
+						<div className='btn'>
+							<Link to='/login'>
+								<button className='login-btn'>Log In</button>
+							</Link>
+						</div>
+						<div className='btn'>
+							<Link to='/register'>
+								<button className='login-btn'>Register</button>
+							</Link>
+						</div>
+					</>
 				)}
 			</div>
 		</div>
