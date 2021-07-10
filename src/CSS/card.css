@@ -70,3 +70,77 @@
 	padding: 8px 10px;
 	cursor: pointer;
 }
+
+.new-place-wrapper {
+	height: max-content;
+	width: 350px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.newPlace-container {
+	height: max-content;
+	width: 300px;
+	display: flex;
+}
+
+.newPlace-wrapper {
+	display: flex;
+	flex-direction: column;
+	font-family: "Poppins";
+	width: 100%;
+}
+
+.newPlace-form {
+	align-items: center;
+	width: 100%;
+}
+
+.label {
+	font-size: 16px;
+}
+
+.txt-area {
+	height: 150px;
+	width: 100%;
+	resize: none;
+}
+
+.newPlace-rating {
+	margin-left: -4px;
+}
+
+.form-items {
+	display: flex;
+	flex-direction: column;
+	padding: 5px 10px;
+}
+
+.title-input {
+	padding: 6px;
+	font-size: 14px;
+
+	outline: none;
+}
+
+.newPlace-button {
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 700;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	display: flex;
+	background-color: black;
+	flex-direction: column;
+	color: white;
+	align-items: center;
+	min-height: 36px;
+	font-family: "Poppins", sans-serif;
+	margin-top: 10px;
+	padding: 5px 10px;
+	cursor: pointer;
+}

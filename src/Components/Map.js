@@ -77,7 +77,7 @@ export default function Map() {
 									closeOnClick={false}
 									onClose={() => setCurrentPlaceId(null)}
 									anchor='left'>
-									<Card />
+									<Card pid={p._id} />
 								</Popup>
 							)}
 						</>
