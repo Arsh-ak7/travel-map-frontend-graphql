@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Rating from "@material-ui/lab/Rating";
 import "../CSS/card.css";
-import { Button } from "@material-ui/core";
+import { Popup } from "react-map-gl";
+import AddDesc from "./AddDesc";
 
-export default function Card({ ...pin }) {
+export default function Card() {
+	const [newPlace, setNewPlace] = useState(null);
+
+	const handleClick = (e) => {
+		const [long, lat] = e.lngLat;
+
+		setNewPlace({
+			lat,
+			long,
+		});
+	};
+
 	return (
 		<div className='card-container'>
 			<div className='card-wrapper'>
@@ -20,9 +32,23 @@ export default function Card({ ...pin }) {
 					<span className='card-date'>publishedAt</span>
 				</div>
 				<h5 className='card-by'>createdBy : Name</h5>
-				<div className='add-desc'>
-					<Button>Add desc</Button>
-				</div>
+				<button
+					type='submit'
+					className='card-add-review-button'
+					onClick={handleClick}>
+					GIVE A REVIEW
+				</button>
+				{newPlace && (
+					<Popup
+						latitude={newPlace.lat}
+						longitude={newPlace.long}
+						closeButton={true}
+						closeOnClick={false}
+						onClose={() => setNewPlace(null)}
+						anchor='left'>
+						<AddDesc />
+					</Popup>
+				)}
 			</div>
 		</div>
 	);
