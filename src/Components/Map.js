@@ -17,11 +17,14 @@ export default function Map() {
 		zoom: 3,
 	});
 	const [newPlace, setNewPlace] = useState(null);
+	const [newPins, setNewPins] = useState(null);
 	const [currentPlaceId, setCurrentPlaceId] = useState(null);
 
 	const { loading, data: { getPins: pins } = {} } = useQuery(GET_PINS);
 
-	useEffect(() => {}, [pins]);
+	useEffect(() => {
+		setNewPins(pins);
+	}, [pins]);
 
 	const handleAddClick = (e) => {
 		const [long, lat] = e.lngLat;
@@ -47,8 +50,8 @@ export default function Map() {
 				onViewportChange={(viewport) => setViewport(viewport)}
 				mapStyle='mapbox://styles/arsh-ak7/ckqi1dldb05q217rr6vfq76j3'
 				onDblClick={handleAddClick}>
-				{pins &&
-					pins.map((p) => (
+				{newPins &&
+					newPins.map((p) => (
 						<>
 							<Marker
 								key={p._id}
@@ -84,13 +87,14 @@ export default function Map() {
 					))}
 				{newPlace && (
 					<Popup
+						key={newPlace.lat}
 						latitude={newPlace.lat}
 						longitude={newPlace.long}
 						closeButton={true}
 						closeOnClick={false}
 						onClose={() => setNewPlace(null)}
 						anchor='left'>
-						<AddDesc />
+						<AddDesc newPlace={newPlace} setNewPins={setNewPins} />
 					</Popup>
 				)}
 			</ReactMapGL>

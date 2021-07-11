@@ -71,6 +71,11 @@
 	cursor: pointer;
 }
 
+.label-card {
+	font-size: 16px;
+	padding-bottom: 3px;
+}
+
 .new-place-wrapper {
 	height: max-content;
 	width: 350px;

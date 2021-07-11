@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import Rating from "@material-ui/lab/Rating";
 import "../CSS/card.css";
-import { Popup } from "react-map-gl";
+import { useContext } from "react";
+import { AuthContext } from "../Context/auth";
+import { useHistory } from "react-router-dom";
 
 export default function Card({ pid }) {
+	const { user } = useContext(AuthContext);
 	const [newPlace, setNewPlace] = useState(false);
+	const history = useHistory();
 
 	const handleClick = () => {
 		setNewPlace(!newPlace);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (!user) history.push("/login");
 	};
 
 	return (
 		<div className='card-container'>
 			{newPlace ? (
 				<div className='new-place-wrapper'>
-					<form className='newPlace-form'>
+					<form className='newPlace-form' onSubmit={handleSubmit}>
 						<div className='form-items'>
-							<label className='label'>Description</label>
+							<label className='label-card'>Description</label>
 							<textarea placeholder='Write a review...' className='txt-area' />
 						</div>
 						<div className='form-items'>
 							<label className='label'>Rating</label>
-							<Rating className='newPlace-rating' />
+							<Rating className='newPlace-rating' name='newPlace-rating' />
 						</div>
 						<button type='submit' className='newPlace-button'>
 							ADD REVIEW
