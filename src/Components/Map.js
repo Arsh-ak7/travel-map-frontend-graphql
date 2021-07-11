@@ -9,6 +9,9 @@ import Card from "../Components/Card";
 
 export default function Map() {
 	const { user } = useContext(AuthContext);
+	const [newPlace, setNewPlace] = useState(null);
+	const [newPins, setNewPins] = useState(null);
+	const [currentPlaceId, setCurrentPlaceId] = useState(null);
 	const [viewport, setViewport] = useState({
 		height: "100vh",
 		width: "100vw",
@@ -16,11 +19,8 @@ export default function Map() {
 		longitude: 12,
 		zoom: 3,
 	});
-	const [newPlace, setNewPlace] = useState(null);
-	const [newPins, setNewPins] = useState(null);
-	const [currentPlaceId, setCurrentPlaceId] = useState(null);
 
-	const { loading, data: { getPins: pins } = {} } = useQuery(GET_PINS);
+	const { data: { getPins: pins } = {} } = useQuery(GET_PINS);
 
 	useEffect(() => {
 		setNewPins(pins);
@@ -68,10 +68,10 @@ export default function Map() {
 												: "slateblue",
 										cursor: "pointer",
 									}}
-									onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
+									onClick={() => handleMarkerClick(p.id, p.lat, p.long)}
 								/>
 							</Marker>
-							{p._id === currentPlaceId && (
+							{p.id === currentPlaceId && (
 								<Popup
 									className='desc-popup'
 									latitude={p.lat}
@@ -80,7 +80,7 @@ export default function Map() {
 									closeOnClick={false}
 									onClose={() => setCurrentPlaceId(null)}
 									anchor='left'>
-									<Card pid={p._id} />
+									<Card pin={p} />
 								</Popup>
 							)}
 						</>
@@ -94,7 +94,11 @@ export default function Map() {
 						closeOnClick={false}
 						onClose={() => setNewPlace(null)}
 						anchor='left'>
-						<AddDesc newPlace={newPlace} setNewPins={setNewPins} />
+						<AddDesc
+							newPlace={newPlace}
+							setNewPins={setNewPins}
+							setNewPlace={setNewPlace}
+						/>
 					</Popup>
 				)}
 			</ReactMapGL>

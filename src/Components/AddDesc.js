@@ -6,7 +6,7 @@ import { useState } from "react";
 import "../CSS/addDesc.css";
 import { useForm } from "../Utils/hooks";
 
-export default function AddDesc({ newPlace, setNewPins }) {
+export default function AddDesc({ newPlace, setNewPins, setNewPlace }) {
 	const [errors, setErrors] = useState([]);
 	const lat = newPlace.lat;
 	const long = newPlace.long;
@@ -24,9 +24,12 @@ export default function AddDesc({ newPlace, setNewPins }) {
 	const [createPin, { loading }] = useMutation(CREATE_PIN, {
 		update(_, { data: { createPin: pinData } }) {
 			setNewPins((prevState) => [...prevState, pinData]);
+			setNewPlace(null);
 		},
 		onError(err) {
-			setErrors(err.graphQLErrors[0].extensions.exception.errors);
+			if (err.graphQLErrors[0].message.startsWith("Authorization"))
+				setErrors("You must login to create a Pin");
+			else setErrors(err.graphQLErrors[0].message);
 		},
 		variables: values,
 	});
@@ -69,9 +72,16 @@ export default function AddDesc({ newPlace, setNewPins }) {
 						/>
 					</div>
 					<button type='submit' className='addDesc-button'>
-						ADD REVIEW
+						{loading ? "CREATING THE REVIEW" : "ADD REVIEW"}
 					</button>
 				</form>
+				{Object.keys(errors).length > 0 && (
+					<div className='card-ui error message'>
+						{Object.values(errors).map((value) => (
+							<span>{value}</span>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	);
