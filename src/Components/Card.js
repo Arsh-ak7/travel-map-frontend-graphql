@@ -10,6 +10,8 @@ import { useEffect } from "react";
 export default function Card({ pin }) {
 	const [newPlace, setNewPlace] = useState(false);
 	const [errors, setErrors] = useState([]);
+	const [newPin, setNewPin] = useState(pin);
+
 	const itemsPerPage = 1;
 	const [page, setPage] = React.useState(1);
 	const [noOfPages, setNoOfPages] = useState(0);
@@ -23,8 +25,10 @@ export default function Card({ pin }) {
 	const { onChange, onSubmit, values } = useForm(addDesc, initialState);
 
 	const [addDescription, { loading }] = useMutation(ADD_DESCRIPTION, {
-		update(_, { data: { createDescription: desc } }) {
-			console.log(desc);
+		update(_, { data: { createDescription: description } }) {
+			setNewPlace(!newPlace);
+			setNoOfPages(description.desc.length);
+			setNewPin(description);
 		},
 		onError(err) {
 			//console.log(err);
@@ -48,8 +52,8 @@ export default function Card({ pin }) {
 	};
 
 	useEffect(() => {
-		setNoOfPages(pin.desc.length);
-	}, [pin.desc.length]);
+		setNoOfPages(newPin.desc.length);
+	}, [newPin]);
 
 	return (
 		<div className='card-container'>
@@ -81,8 +85,8 @@ export default function Card({ pin }) {
 					</form>
 					{Object.keys(errors).length > 0 && (
 						<div className='card-ui error message'>
-							{Object.values(errors).map((value) => (
-								<span>{value}</span>
+							{Object.values(errors).map((value, index) => (
+								<span key={index}>{value}</span>
 							))}
 						</div>
 					)}
@@ -90,10 +94,10 @@ export default function Card({ pin }) {
 			) : (
 				<div className='card-wrapper'>
 					<h3 className='card-title'>{pin.title}</h3>
-					{pin.desc
+					{newPin.desc
 						.slice((page - 1) * itemsPerPage, page * itemsPerPage)
-						.map((pinDesc) => (
-							<div className='card-desc' key={pinDesc.username}>
+						.map((pinDesc, index) => (
+							<div className='card-desc' key={index}>
 								<span className='card-username'>
 									Review By : {pinDesc.username}
 								</span>
