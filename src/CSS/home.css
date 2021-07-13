@@ -41,6 +41,10 @@
 	padding-top: 10px;
 }
 
+.tile-contents-btn {
+	color: white;
+}
+
 .tile-heading {
 	font-family: "Bona Nova";
 	font-size: 32px;
@@ -76,4 +80,34 @@
 	padding: 10px;
 	font-family: "Poppins";
 	font-size: 20px;
+}
+
+.tile-map-btn {
+	background-color: black;
+	outline: none;
+	height: 100%;
+	cursor: pointer;
+	border: none;
+}
+
+.btm-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 50px;
+}
+
+.btm-heading {
+	font-size: 36px;
+	font-family: "Bona Nova";
+	font-weight: 600;
+	color: black;
+}
+
+.image-btm {
+	object-fit: cover;
+	width: 225px;
+	height: 150px;
 }

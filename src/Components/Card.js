@@ -54,7 +54,9 @@ export default function Card({ pin, setNewPins }) {
 			setNewPins(afterDelete);
 		},
 		onError(err) {
-			if (err.graphQLErrors[0].message.startsWith("AuthenticationError:"))
+			if (err.graphQLErrors[0].message.startsWith("Authorization"))
+				setErrors("You must login to delete");
+			else if (err.graphQLErrors[0].message.startsWith("AuthenticationError:"))
 				setErrors("You are not authorized to delete this marker");
 			else setErrors(err.graphQLErrors[0].message);
 		},

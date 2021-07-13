@@ -37,6 +37,7 @@ export default function Map() {
 			lat,
 			long,
 		});
+		setViewport({ ...viewport, latitude: lat, longitude: long });
 	};
 
 	const handleMarkerClick = (id, lat, long) => {
@@ -59,7 +60,7 @@ export default function Map() {
 					newPins.map((p) => (
 						<>
 							<Marker
-								key={p._id}
+								key={p.id}
 								latitude={p.lat}
 								longitude={p.long}
 								offsetLeft={-viewport.zoom * 3.5}
@@ -79,6 +80,7 @@ export default function Map() {
 							{p.id === currentPlaceId && (
 								<Popup
 									className='desc-popup'
+									key={p.id}
 									latitude={p.lat}
 									longitude={p.long}
 									closeButton={true}
