@@ -22,7 +22,8 @@
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
 		"timeago.js": "^4.0.2",
-		"web-vitals": "^1.1.2"
+		"web-vitals": "^1.1.2",
+		"worker-loader": "^3.0.8"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -34,12 +35,18 @@
 		"extends": [
 			"react-app",
 			"react-app/jest"
-		]
+		],
+		"rules": {
+			"import/no-webpack-loader-syntax": "off"
+		}
 	},
 	"browserslist": {
 		"production": [
 			">0.2%",
 			"not dead",
+			"not ie 11",
+			"not chrome < 51",
+			"not safari < 10",
 			"not op_mini all"
 		],
 		"development": [

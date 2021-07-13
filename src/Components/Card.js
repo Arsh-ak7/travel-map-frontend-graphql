@@ -7,10 +7,9 @@ import { useForm } from "../Utils/hooks";
 import Pagination from "@material-ui/lab/Pagination";
 import { useEffect } from "react";
 
-export default function Card({ pin }) {
+export default function Card({ pin, setNewPins }) {
 	const [newPlace, setNewPlace] = useState(false);
 	const [errors, setErrors] = useState([]);
-	const [newPin, setNewPin] = useState(pin);
 
 	const itemsPerPage = 1;
 	const [page, setPage] = React.useState(1);
@@ -27,8 +26,7 @@ export default function Card({ pin }) {
 	const [addDescription, { loading }] = useMutation(ADD_DESCRIPTION, {
 		update(_, { data: { createDescription: description } }) {
 			setNewPlace(!newPlace);
-			setNoOfPages(description.desc.length);
-			setNewPin(description);
+			setNewPins(description);
 		},
 		onError(err) {
 			//console.log(err);
@@ -51,9 +49,27 @@ export default function Card({ pin }) {
 		setPage(value);
 	};
 
+	const [deletePin, { deletingPin }] = useMutation(DELETE_MARKER, {
+		update(_, { data: { deletePin: afterDelete } }) {
+			setNewPins(afterDelete);
+		},
+		onError(err) {
+			if (err.graphQLErrors[0].message.startsWith("AuthenticationError:"))
+				setErrors("You are not authorized to delete this marker");
+			else setErrors(err.graphQLErrors[0].message);
+		},
+		variables: { pinId: pin.id },
+	});
+
+	const handleDelete = () => {
+		deletePin();
+	};
+
 	useEffect(() => {
-		setNoOfPages(newPin.desc.length);
-	}, [newPin]);
+		setNoOfPages(pin.desc.length);
+	}, [pin]);
+
+	//TODO : Review Deletion
 
 	return (
 		<div className='card-container'>
@@ -94,7 +110,7 @@ export default function Card({ pin }) {
 			) : (
 				<div className='card-wrapper'>
 					<h3 className='card-title'>{pin.title}</h3>
-					{newPin.desc
+					{pin.desc
 						.slice((page - 1) * itemsPerPage, page * itemsPerPage)
 						.map((pinDesc, index) => (
 							<div className='card-desc' key={index}>
@@ -121,12 +137,27 @@ export default function Card({ pin }) {
 						showLastButton
 					/>
 					<h5 className='card-by'>Marker createdBy : {pin.createdBy}</h5>
-					<button
-						type='submit'
-						className='card-add-review-button'
-						onClick={handleClick}>
-						GIVE A REVIEW
-					</button>
+					<div className='func-btns'>
+						<button
+							type='submit'
+							className='card-add-review-button'
+							onClick={handleClick}>
+							GIVE A REVIEW
+						</button>
+						<button
+							type='submit'
+							className='card-delete-button'
+							onClick={handleDelete}>
+							{deletingPin ? "REMOVING MARKER" : "REMOVE MARKER"}
+						</button>
+					</div>
+					{Object.keys(errors).length > 0 && (
+						<div className='card-ui error message'>
+							{Object.values(errors).map((value, index) => (
+								<span key={index}>{value}</span>
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		</div>
@@ -144,6 +175,25 @@ const ADD_DESCRIPTION = gql`
 			pinId: $pinId
 			desc: { body: $body, rating: $rating, publishedAt: $publishedAt }
 		) {
+			id
+			createdBy
+			title
+			desc {
+				username
+				body
+				rating
+				publishedAt
+			}
+			lat
+			long
+		}
+	}
+`;
+
+const DELETE_MARKER = gql`
+	mutation deletePin($pinId: ID!) {
+		deletePin(pinId: $pinId) {
+			id
 			createdBy
 			title
 			desc {

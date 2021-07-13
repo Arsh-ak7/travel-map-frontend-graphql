@@ -6,6 +6,11 @@ import { gql, useQuery } from "@apollo/client";
 import RoomIcon from "@material-ui/icons/Room";
 import AddDesc from "../Components/AddDesc";
 import Card from "../Components/Card";
+import mapboxgl from "mapbox-gl";
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass =
+	require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 export default function Map() {
 	const { user } = useContext(AuthContext);
@@ -23,7 +28,7 @@ export default function Map() {
 	const { data: { getPins: pins } = {} } = useQuery(GET_PINS);
 
 	useEffect(() => {
-		setNewPins(pins);
+		pins && setNewPins(pins);
 	}, [pins]);
 
 	const handleAddClick = (e) => {
@@ -80,7 +85,7 @@ export default function Map() {
 									closeOnClick={false}
 									onClose={() => setCurrentPlaceId(null)}
 									anchor='left'>
-									<Card pin={p} />
+									<Card pin={p} setNewPins={setNewPins} />
 								</Popup>
 							)}
 						</>
