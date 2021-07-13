@@ -77,8 +77,8 @@ export default function AddDesc({ newPlace, setNewPins, setNewPlace }) {
 				</form>
 				{Object.keys(errors).length > 0 && (
 					<div className='card-ui error message'>
-						{Object.values(errors).map((value) => (
-							<span>{value}</span>
+						{Object.values(errors).map((value, index) => (
+							<span key={index}>{value}</span>
 						))}
 					</div>
 				)}
@@ -102,6 +102,7 @@ const CREATE_PIN = gql`
 			lat: $lat
 			long: $long
 		) {
+			id
 			createdBy
 			title
 			desc {

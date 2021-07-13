@@ -58,7 +58,6 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			{console.log(randomPlace)}
 			{randomPlace && (
 				<div className='btm-container'>
 					<span className='btm-heading'>

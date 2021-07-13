@@ -29,7 +29,6 @@ export default function Card({ pin, setNewPins }) {
 			setNewPins(description);
 		},
 		onError(err) {
-			//console.log(err);
 			if (err.graphQLErrors[0].message.startsWith("Authorization"))
 				setErrors("You must login to give a review");
 			else setErrors(err.graphQLErrors[0].message);
@@ -58,7 +57,7 @@ export default function Card({ pin, setNewPins }) {
 				setErrors("You must login to delete");
 			else if (err.graphQLErrors[0].message.startsWith("AuthenticationError:"))
 				setErrors("You are not authorized to delete this marker");
-			else setErrors(err.graphQLErrors[0].message);
+			else setErrors(err.graphQLErrors[0]);
 		},
 		variables: { pinId: pin.id },
 	});

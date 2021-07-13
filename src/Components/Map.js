@@ -57,10 +57,10 @@ export default function Map() {
 				mapStyle='mapbox://styles/arsh-ak7/ckqi1dldb05q217rr6vfq76j3'
 				onDblClick={handleAddClick}>
 				{newPins &&
-					newPins.map((p) => (
+					newPins.map((p, index) => (
 						<>
 							<Marker
-								key={p.id}
+								key={index}
 								latitude={p.lat}
 								longitude={p.long}
 								offsetLeft={-viewport.zoom * 3.5}
@@ -80,7 +80,7 @@ export default function Map() {
 							{p.id === currentPlaceId && (
 								<Popup
 									className='desc-popup'
-									key={p.id}
+									key={Math.random() * index}
 									latitude={p.lat}
 									longitude={p.long}
 									closeButton={true}
