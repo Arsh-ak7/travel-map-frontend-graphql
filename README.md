@@ -1,7 +1,7 @@
 # A Travel Map
 ### Made a website where in users can pin the places they visit, give reviews about it and also if confused can let their luck decide where they want to visit next!
 
-##### Some screenshots of the Website
+#### Some screenshots of the Website
 
 ### Home Page
 
@@ -21,8 +21,8 @@
 
 ### Do check out the [Website](https://travel-log-951f7.web.app/)
 
-#### Frontend is based on ReactJs and mapbox.
+#### Frontend is based on ReactJS, Mapbox and is hosted using Firebase.
 
-#### Backend is based on GraphQL, nodejs and mongodb as database.
+#### Backend is based on GraphQL, NodeJS and Mongodb as database.
 
 ### Check out the [backend Code](https://github.com/Arsh-ak7/travel-map-backend-graphql)
