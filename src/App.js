@@ -7,6 +7,7 @@ import AuthRoute from "./Utils/authRoute";
 import Map from "./Components/Map";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import Connect from "./Pages/Connect";
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 				<Router>
 					<Navbar />
 					<Route exact path='/' component={Home} />
+					<Route exact path='/connect' component={Connect} />
 					<AuthRoute exact path='/login' component={Login} />
 					<AuthRoute exact path='/register' component={Register} />
 					<Route exact path='/map' component={Map} />

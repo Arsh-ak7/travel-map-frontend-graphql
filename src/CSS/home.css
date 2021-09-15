@@ -36,8 +36,19 @@
 	background-color: black;
 }
 
+.tile-contents-wrapper-white {
+	height: 100%;
+	color: black;
+	background-color: white;
+}
+
 .tile-contents {
 	color: white;
+	padding-top: 10px;
+}
+
+.tile-contents-black {
+	color: black;
 	padding-top: 10px;
 }
 

@@ -4,6 +4,7 @@ import Axios from "axios";
 import HomeMap from "../images/home-tile.jpeg";
 import TravelHome from "../images/travel-home.png";
 import AdvAwaits from "../images/travel-btm.png";
+import TravelBuddies from "../images/travel-1.jpg";
 
 import "../CSS/home.css";
 
@@ -55,6 +56,23 @@ export default function Home() {
 					</div>
 					<div className='tile-image-container'>
 						<img className='tile-image' src={TravelHome} alt='tile' />
+					</div>
+				</div>
+				<div className='tile-container'>
+					<div className='tile-image-container'>
+						<img className='tile-image' src={TravelBuddies} alt='tile' />
+					</div>
+					<div className='tile-contents-wrapper'>
+						<Link to='/connect' className='tile-map-link'>
+							<div className='tile-contents'>
+								<span className='tile-heading'>SOLO TRAVELLING?</span>
+								<p className='tile-para'>
+									Find and connect with people.
+									<br />
+									Make Friends, Explore Together.
+								</p>
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>
